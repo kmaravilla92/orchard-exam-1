@@ -61,11 +61,44 @@ if ( !function_exists( 'orchard_find_page_banner_image' ) ) {
                 }
 
                 $banner_image = get_field( 'banner_image', $field_id );
-                
                 break;
             }
         }
 
         return $banner_image;
+    }
+}
+
+/**
+ * Hides the Banner Image Field for non root submenu items.
+ * 
+ * @param   array $field    Field settings to filter.
+ * @return  array           Filtered field settings.
+ */
+if ( !function_exists( 'orchard_submenu_item_hide_banner_image_field' ) ) {
+    add_filter( 'acf/prepare_field/name=banner_image', 'orchard_submenu_item_hide_banner_image_field' );
+    function orchard_submenu_item_hide_banner_image_field(
+        array $field
+    ): array {
+        $menu_item_id = preg_replace(
+            '/[^\d]+/',
+            '',
+            $field['prefix']
+        );
+        
+        $nav_menu_items = wp_get_nav_menu_items(
+            'Primary Menu',
+            [
+                'p' => $menu_item_id,
+            ]
+        );
+
+        foreach ( $nav_menu_items as $nav_menu_item ) {
+            if ( (int) $nav_menu_item->menu_item_parent > 0 ) {
+                return [];
+            }
+        }
+
+        return $field;
     }
 }
