@@ -17,7 +17,11 @@ get_header();
                 orchard_find_page_banner_image(
                     get_the_ID()
                 ),
-                'full'
+                'full',
+                false,
+                [
+                    'class' => 'banner-image'
+                ]
             );
             ?>
         </section>

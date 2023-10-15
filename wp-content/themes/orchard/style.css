@@ -56,7 +56,11 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    margin-top: 63px;
+}
+
+.admin-bar .main {
+    margin-top: 95px;
 }
 
 /**
@@ -175,4 +179,11 @@ h1 {
     align-items: center;
     width: 100%;
     padding: 100px 50px;
+}
+
+/**
+ * Banner Image
+ */
+.banner-image {
+    max-width: 960px;
 }
