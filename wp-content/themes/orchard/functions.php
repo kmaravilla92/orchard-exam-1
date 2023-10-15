@@ -70,6 +70,13 @@ if ( !function_exists( 'orchard_find_page_banner_image' ) ) {
 }
 
 /**
+ * Adds directory to save ACF JSON.
+ * 
+ * @return string Directory path to save ACF JSON.
+ */
+add_filter( 'acf/settings/save_json', fn(): string => get_stylesheet_directory() . '/acf-json' );
+
+/**
  * Hides the Banner Image Field for non root submenu items.
  * 
  * @param   array $field    Field settings to filter.
